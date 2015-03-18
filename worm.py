@@ -12,7 +12,7 @@ reliable method of stopping the program at any time.
 
 import subprocess
 import psutil
-#will need to import some module for networking funcs..
+import socket
 
 def main():
     """Main function of program."""
@@ -23,6 +23,10 @@ def main():
     memory = psutil.virtual_memory()
     memoryReport = "mem: "+bytes2human(memory.total)
     print memoryReport
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((socket.gethostname(), 8080))
+    s.send(memoryReport)
+    s.close()
     pass
 
 def repl():
@@ -53,3 +57,4 @@ def bytes2human(n):
 
 #if __name__ == '__main__':
 #   main()
+main()

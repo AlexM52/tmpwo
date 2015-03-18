@@ -15,6 +15,7 @@ def main():
         msg = c.recv(4096)
         print msg
         c.close()
-        srvsock.close()
+        
+    #srvsock.close()
     
 main()
