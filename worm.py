@@ -22,10 +22,27 @@ def main():
     # Collect info
     memory = psutil.virtual_memory()
     memoryReport = "mem: "+bytes2human(memory.total)
-    print memoryReport
+    #print memoryReport
+    #psutil.cpu_percent()
+    cpup = "cpu utilizn: "+str(psutil.cpu_percent(0.1))
+    cpucl = "cpu count (logical): "+str(psutil.cpu_count())
+    cpucp = "cpu count (physical): "+str(psutil.cpu_count(False))
+    dk = psutil.disk_partitions()
+    ds = []
+    for i in range(len(dk)):
+        ds.append("disk "+str(i)+": "+dk[i].device+", "+dk[i].fstype)
+    dss = "disks: "+str(ds)
+    nc = psutil.net_connections()
+    ns = []
+    for i in range(len(nc)):
+        ns.append("conn "+str(i)+": "+str(nc[i].laddr)+", "+str(nc[i].raddr)+", "+str(nc[i].pid))
+    nss = "conns: "+str(ns)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((socket.gethostname(), 8080))
-    s.send(memoryReport)
+    data = cpup+"\n"+cpucp+"\n"+cpucl+"\n"+memoryReport+"\n"+dss+"\n"+nss
+    print data
+    #s.send(memoryReport)
+    s.send(data)
     s.close()
     pass
 

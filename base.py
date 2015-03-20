@@ -5,6 +5,7 @@ def main():
     srvsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print "Binding socket.."
     srvsock.bind((socket.gethostname(), 8080))
+    #srvsock.bind(("0.0.0.0", 8080))
     srvsock.listen(2)
     print "Listening.\n"
     
@@ -13,7 +14,7 @@ def main():
         (c, addr) = srvsock.accept()
         print "Connection from : ", addr
         msg = c.recv(4096)
-        print msg
+        print msg, "\n"
         c.close()
         
     #srvsock.close()
