@@ -16,8 +16,6 @@ import socket
 
 def main():
     """Main function of program."""
-    #repl()
-    #prop()     #maybe can use psutil for these as well..id new targets etc..?
     
     # Collect info
     memory = psutil.virtual_memory()
@@ -46,13 +44,7 @@ def main():
     s.close()
     pass
 
-def repl():
-    """Replication function."""
-    pass
 
-def prop():
-    """Propagation function."""
-    pass
 
 def bytes2human(n):
     ## this code from https://github.com/giampaolo/psutil/blob/master/examples/meminfo.py
